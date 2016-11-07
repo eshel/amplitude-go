@@ -15,3 +15,10 @@ func OnPublishFunc(fn func(status int, err error)) Option {
 		c.onPublishFunc = fn
 	}
 }
+
+// QueueSize returns an Option to set the event chanel size
+func QueueSize(size int) Option {
+	return func(c *Client) {
+		c.ch = make(chan Event, size)
+	}
+}

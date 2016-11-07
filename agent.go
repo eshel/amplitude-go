@@ -52,7 +52,6 @@ type Client struct {
 	apiKey        string
 	ch            chan Event
 	flush         chan chan struct{}
-	queueSize     int
 	interval      time.Duration
 	onPublishFunc func(status int, err error)
 }
@@ -66,7 +65,6 @@ func New(apiKey string, options ...Option) *Client {
 		apiKey:        apiKey,
 		ch:            make(chan Event, DefaultQueueSize),
 		flush:         make(chan chan struct{}),
-		queueSize:     DefaultQueueSize,
 		interval:      time.Second * 15,
 		onPublishFunc: func(status int, err error) {},
 	}
